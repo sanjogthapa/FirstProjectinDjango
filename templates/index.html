@@ -1,0 +1,23 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% block content %}
+    <img src="{% static 'images/car.png' %}" alt="not found" height="20px">
+    <p>
+        This is my first home page!!
+    </p>
+    <h3> Name: {{user_name}}</h3>
+    <p>Here are the list of friends:</p>
+    <ul>
+        {% for friend in friends %}
+            {% if friend == 'ram' %}
+                <li><strong>{{ friend }}</strong></li>
+            {% else %}
+                <li><em>{{ friend }}</em></li>
+
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

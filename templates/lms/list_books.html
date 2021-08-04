@@ -1,0 +1,49 @@
+{% extends 'includes/base.html' %}
+
+{% load lib_mgmt_sys_extras %}
+
+{% block content %}
+<div class="col-sm-8">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>No. of Pages</th>
+            <th>Photo</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.price}}</td>
+                <td>{{book.no_pgs}}</td>
+                <td>
+                    <img src="{{book.cover_photo.url}}" alt="Not found"
+                </td>
+                <td>
+                    {% if user.is_authenticated and request.user|has_group:'Librarian' %}
+                    <a href="{% url 'lms:edit_book' id=book.id %}">
+                        <button class="btn btn-warning"> Edit</button>
+                    </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.is_authenticated and request.user|has_group:'Librarian' %}
+                    <a href="{% url 'lms:delete_book' id=book.id %}">
+                        <button class="btn btn-danger"> Delete</button>
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+
+    <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                {% if user.is_authenticatedd %}
+                <th>Edit</th>
+                <th>Delete</th>
+                {% endif %}
+                <th>Detail</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for author in author_list %}
+                <tr>
+                    <td>{{author.name}}</td>
+                    <td>{{author.age}}</td>
+                    {% if user.is_authenticated %}
+                    <th><a href="{% url 'lms:update_author' pk=author.id %}">
+                    <button class="btn btn-warning">Edit</button> </a>
+                    </th>
+                    <th><a href="{% url 'lms:delete_author' pk=author.id %}">
+                    <button class="btn btn-danger">Delete</button> </a>
+                    </th>
+                    {% endif %}
+
+                    <th><a href="{% url 'lms:detail_author' pk=author.id %}">
+                    <button class="btn btn-dark">Detail</button> </a>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+{% endblock %}

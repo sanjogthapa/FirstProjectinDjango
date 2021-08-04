@@ -1,0 +1,12 @@
+{%  extends 'includes/base.html' %}
+
+{% block content %}
+
+    <form action="/lms/add_author/" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Submit</button>
+
+
+    </form>
+{% endblock %}
